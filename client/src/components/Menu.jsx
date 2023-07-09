@@ -26,9 +26,9 @@ const MenuItem = ({ item }) => {
         <div className="text-xl">{item.name}</div>
         <div className="text-sm">{item.description}</div>
 
-        <div className="justify-between flex flex-row relative">
+        <div className="justify-between flex flex-row pt-5">
           <div className="text-xl">{item.price}</div>
-          <button className="rounded-full bg-yellow-500 p-5"></button>
+          <button className="rounded-full bg-yellow-500 p-3">🛒</button>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@ const MenuItem = ({ item }) => {
 const Menu = () => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
   return (
-    <div className="bg-white text-primary flex flex-col items-center gap-5 p-10">
+    <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 pt-32">
       <div className="text-4xl">Our Menu</div>
       <div className="flex flex-row gap-3">
         <FilterButton

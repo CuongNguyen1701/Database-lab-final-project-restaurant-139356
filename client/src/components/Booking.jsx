@@ -42,7 +42,7 @@ const Booking = () => {
   const [personCount, setPersonCount] = useState(0);
 
   return (
-    <div className="bg-white text-primary flex flex-col items-center gap-5 p-10">
+    <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 w-screen h-fit pt-32">
       <div className="text-4xl">Book A Table</div>
       <form className="flex flex-col gap-5 text-white w-1/3">
         <InputField
