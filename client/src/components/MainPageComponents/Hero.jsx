@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { SectionWrapper } from "../../hoc";
 import { styles } from "../../styles";
 const Hero = () => {
   return (
@@ -14,7 +13,9 @@ const Hero = () => {
             our mouth watering menu filled with delectable delights that will
             leave you craving for more.{" "}
           </div>
-          <button className="bg-yellow-500 py-3 px-10 w-44 rounded-3xl text-primary">Order now</button>
+          <button className="bg-yellow-500 py-3 px-10 w-44 rounded-3xl text-primary">
+            Order now
+          </button>
         </div>
       </div>
     </div>

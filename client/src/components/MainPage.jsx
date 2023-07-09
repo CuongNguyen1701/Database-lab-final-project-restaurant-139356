@@ -1,4 +1,4 @@
-import { FileInput, Hero } from "./MainPageComponents";
+import { Hero } from "./MainPageComponents";
 import React, { useState } from "react";
 import About from "./About";
 import Menu from "./Menu";

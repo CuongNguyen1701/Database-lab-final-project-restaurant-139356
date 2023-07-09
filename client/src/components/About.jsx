@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { styles } from "../styles";
 import { members } from "../constants";
-import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const MemberCard = ({ index, name, image, role, description }) => {
