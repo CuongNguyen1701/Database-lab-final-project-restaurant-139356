@@ -4,6 +4,7 @@ import axios from "axios";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
+import LoginButton from "./Buttons/LoginButton";
 const LogoTitle = () => {
   return (
     <Link
@@ -30,40 +31,17 @@ const LogoTitle = () => {
   );
 };
 
-const LoginButton = () => {
-  return (
-    <button className="bg-yellow-500 py-2 px-5 w-32 rounded-3xl text-primary font-semibold hover:bg-yellow-200">
-      Login
-    </button>
-  );
-};
-
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const currentPath = useLocation().pathname;
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <nav
       className={`${
         styles.paddingX
       } w-full flex items-center py-5 absolute top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
+        currentPath !== "/" ? "bg-primary" : "bg-transparent"
       }`}
     >
       <div className="flex items-center justify-between w-full mx-auto select-none max-w-7xl">
