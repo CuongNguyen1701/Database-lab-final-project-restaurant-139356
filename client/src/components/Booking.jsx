@@ -33,7 +33,20 @@ const Booking = () => {
           type="tel"
         />
         <InputField value={date} setValue={setDate} type="date" />
-        <SelectField value={personCount} setValue={setPersonCount} />
+        <SelectField
+          value={personCount}
+          setValue={setPersonCount}
+          placeholder={"how many persons?"}
+          options={[
+            { value: 1, text: "1 Person" },
+            { value: 2, text: "2 Persons" },
+            { value: 3, text: "3 Persons" },
+            { value: 4, text: "4 Persons" },
+            { value: 5, text: "5 Persons" },
+            { value: 6, text: "6 Persons" },
+            { value: 7, text: "7 Persons" },
+          ]}
+        />
         <GenericButton text="Book Now" onClick={HandleBooking} />
       </form>
     </div>
