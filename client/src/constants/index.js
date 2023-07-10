@@ -33,4 +33,12 @@ export const navLinks = [
   },
 ];
 
+export const adminNavLinks = [
+  {
+    id: "admin",
+    title: "ADMIN",
+    pathname: "/admin",
+  },
+];
+
 export { members };
