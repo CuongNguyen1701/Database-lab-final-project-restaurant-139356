@@ -63,6 +63,11 @@ const ChatBot = () => {
                 e.preventDefault();
                 setChatInput(e.target.value);
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  HandleSend(e);
+                }
+              }}
             ></input>
             <button
               className="bg-yellow-500 p-3 rounded-xl font-bold"
