@@ -40,7 +40,7 @@ const Navbar = () => {
     <nav
       className={`${
         styles.paddingX
-      } w-full flex items-center py-5 absolute top-0 z-20 ${
+      } w-full flex items-center py-5 absolute top-0 z-20 no-scrollbar ${
         currentPath !== "/" ? "bg-primary" : "bg-transparent"
       }`}
     >

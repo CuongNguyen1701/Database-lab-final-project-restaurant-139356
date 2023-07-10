@@ -5,4 +5,16 @@ import Booking from "./Booking";
 import Menu from "./Menu";
 import NotFound from "./NotFound";
 import ChatBot from "./Features/ChatBot";
-export { MainPage, Navbar, About, Booking, Menu, NotFound, ChatBot };
+import Signup from "./Signup";
+import AddDish from "./Admin/AddDish";
+export {
+  MainPage,
+  Navbar,
+  About,
+  Booking,
+  Menu,
+  NotFound,
+  ChatBot,
+  Signup,
+  AddDish,
+};

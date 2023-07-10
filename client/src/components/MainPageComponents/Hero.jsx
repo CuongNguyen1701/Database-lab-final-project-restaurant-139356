@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { styles } from "../../styles";
+import GenericButton from "../Buttons/GenericButton";
 const Hero = () => {
   return (
     <div className={`relative w-full h-screen mx-0 `}>
@@ -13,9 +14,7 @@ const Hero = () => {
             our mouth watering menu filled with delectable delights that will
             leave you craving for more.{" "}
           </div>
-          <button className="bg-yellow-500 py-3 px-10 w-44 rounded-3xl text-primary">
-            Order now
-          </button>
+          <GenericButton text="Order Now" />
         </div>
       </div>
     </div>

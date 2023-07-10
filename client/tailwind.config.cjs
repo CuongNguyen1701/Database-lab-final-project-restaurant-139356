@@ -49,5 +49,9 @@ module.exports = {
       },
     },
   },
-  plugins: [backfaceVisibility, advancedTransform, transformStyles],
+  plugins: [
+    backfaceVisibility,
+    advancedTransform,
+    transformStyles,
+  ],
 };

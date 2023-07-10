@@ -1,14 +1,50 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const ChatBot = () => {
+  const bottomRef = useRef(null);
   const [displayChat, setDisplayChat] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [chatInput, setChatInput] = useState("");
+  const HandleSend = (e) => {
+    e.preventDefault();
+    if (chatInput === "") return;
+    const message = {
+      type: "user",
+      message: chatInput,
+    };
+    const response = {
+      type: "bot",
+      message: "Hello",
+    };
+    setChatHistory([...chatHistory, message, response]);
+    //show latest messages
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    setChatInput("");
+  };
+  const MessageBubble = ({ item }) => {
+    return (
+      <div
+        className={`${
+          item.type === "bot"
+            ? "bg-yellow-500 rounded-bl-none"
+            : "bg-white self-end rounded-br-none"
+        } text-xl rounded-lg p-3 w-fit border-2 border-primary`}
+      >
+        {item.message}
+      </div>
+    );
+  };
   return (
     <div className="fixed bottom-0 left-0 z-30 text-yellow-500 bg-primary  m-5 rounded-2xl ">
       {displayChat ? (
-        <div className="border-4 border-primary bg-white pt-20 pb-3 pl-20 pr-5 rounded-xl text-primary">
-          Chat box here
+        <div className="border-4 border-primary bg-white pt-5 pb-3 pl-20 pr-5 rounded-xl text-primary">
+          <div className="flex flex-col max-h-96 overflow-scroll no-scrollbar">
+            {chatHistory.map((item, index) => {
+              return <MessageBubble item={item} key={index}></MessageBubble>;
+            })}
+            <div ref={bottomRef}></div>
+          </div>
+          Chat here
           <div className=" flex flex-row gap-3">
             <button
               className="absolute bottom-0 left-0 bg-yellow-500 border-4 border-primary p-3 rounded-xl font-bold select-none"
@@ -28,7 +64,10 @@ const ChatBot = () => {
                 setChatInput(e.target.value);
               }}
             ></input>
-            <button className="bg-yellow-500 p-3 rounded-xl font-bold">
+            <button
+              className="bg-yellow-500 p-3 rounded-xl font-bold"
+              onClick={HandleSend}
+            >
               Send
             </button>
           </div>

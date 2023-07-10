@@ -5,7 +5,7 @@ import Menu from "./Menu";
 import Booking from "./Booking";
 const MainPage = () => {
   return (
-    <div>
+    <div className="no-scrollbar">
       <div className="bg-no-repeat bg-hero-pattern relative bg-cover">
         <Hero />
       </div>

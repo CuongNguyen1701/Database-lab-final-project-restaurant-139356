@@ -1,50 +1,19 @@
 import { useState } from "react";
-const InputField = ({
-  value,
-  setValue,
-  placeholder,
-  type,
-  isOption = false,
-}) => {
-  const styles = "border-2 border-gray-300 rounded-md py-3 px-5 w-full text-xl";
-  if (isOption) {
-    return (
-      <select
-        value={value}
-        placeholder="how many persons?"
-        className={styles}
-        onChange={(e) => setValue(e.target.value)}
-      >
-        <option value="1">1 Person</option>
-        <option value="2">2 Persons</option>
-        <option value="3">3 Persons</option>
-        <option value="4">4 Persons</option>
-        <option value="5">5 Persons</option>
-      </select>
-    );
-  }
-  return (
-    <input
-      type={type}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      placeholder={placeholder}
-      className={styles}
-    />
-  );
-};
-
+import { InputField, SelectField } from "./InputFields/InputField";
+import GenericButton from "./Buttons/GenericButton";
 const Booking = () => {
   const [guestName, setGuestName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [personCount, setPersonCount] = useState(0);
-
+  const HandleBooking = () => {
+    //TODO: Handle booking
+  };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 w-screen h-fit pt-32">
       <div className="text-4xl">Book A Table</div>
-      <form className="flex flex-col gap-5 text-white w-1/3">
+      <form className="flex flex-col items-center gap-5 text-white w-1/3">
         <InputField
           value={guestName}
           setValue={setGuestName}
@@ -64,7 +33,8 @@ const Booking = () => {
           type="tel"
         />
         <InputField value={date} setValue={setDate} type="date" />
-        <InputField value={personCount} setValue={setPersonCount} isOption />
+        <SelectField value={personCount} setValue={setPersonCount} />
+        <GenericButton text="Book Now" onClick={HandleBooking} />
       </form>
     </div>
   );
