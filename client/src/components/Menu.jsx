@@ -39,9 +39,12 @@ const MenuItem = ({ item }) => {
   );
 };
 
+//Get distinct categories from menuData
+let categoryList = [...new Set(menuData.map((item) => item.category))];
 const Menu = () => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
   const [search, setSearch] = React.useState("");
+
   const HandleSearch = (e) => {
     e.preventDefault();
     //TODO: Handle search
@@ -57,32 +60,27 @@ const Menu = () => {
         />
         <GenericButton text="Search" onClick={HandleSearch} />
       </div>
-      <div className="flex flex-row gap-3">
+      <div className="flex flex-row flex-wrap gap-3">
         <FilterButton
           text="All"
           selected={selectedFilter}
           setSelected={setSelectedFilter}
         />
-        <FilterButton
-          text="Burgers"
-          selected={selectedFilter}
-          setSelected={setSelectedFilter}
-        />
-        <FilterButton
-          text="Pizzas"
-          selected={selectedFilter}
-          setSelected={setSelectedFilter}
-        />
-        <FilterButton
-          text="Drinks"
-          selected={selectedFilter}
-          setSelected={setSelectedFilter}
-        />
+        {categoryList.map((category, index) => (
+          <FilterButton
+            text={category}
+            key={index}
+            selected={selectedFilter}
+            setSelected={setSelectedFilter}
+          />
+        ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 items-center mx-auto">
-        {menuData.map((item, index) => (
-          <MenuItem key={index} item={item} />
-        ))}
+        {menuData.map((item, index) =>
+          item.category === selectedFilter || selectedFilter === "All" ? (
+            <MenuItem key={index} item={item} />
+          ) : null
+        )}
       </div>
     </div>
   );
