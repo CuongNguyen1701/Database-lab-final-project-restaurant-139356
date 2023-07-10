@@ -37,7 +37,7 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(true);
   return (
     <BrowserRouter>
-      <div className="relative z-0 no-scrollbar">
+      <div className="relative z-0  overflow-scroll no-scrollbar h-screen">
         <Navbar isAdmin={isAdmin} />
         <ChatBot />
         <ToggleAdminButton setValue={setIsAdmin} />
