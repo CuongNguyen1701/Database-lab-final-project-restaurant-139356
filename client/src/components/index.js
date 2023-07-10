@@ -5,8 +5,9 @@ import Booking from "./Booking";
 import Menu from "./Menu";
 import NotFound from "./NotFound";
 import ChatBot from "./Features/ChatBot";
-import Signup from "./Signup";
+import Signup from "./Account/Signup";
 import AddDish from "./Admin/AddDish";
+import AdminHomepage from "./Admin/AdminHomepage";
 export {
   MainPage,
   Navbar,
@@ -17,4 +18,5 @@ export {
   ChatBot,
   Signup,
   AddDish,
+  AdminHomepage,
 };
