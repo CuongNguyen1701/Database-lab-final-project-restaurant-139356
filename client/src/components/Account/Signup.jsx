@@ -1,8 +1,8 @@
 import React from "react";
-import { InputField } from "./InputFields/InputField";
+import { InputField } from "../InputFields/InputField";
 import { useState } from "react";
 import bcrypt from "bcryptjs"; //for password hashing
-import GenericButton from "./Buttons/GenericButton";
+import GenericButton from "../Buttons/GenericButton";
 const Signup = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");

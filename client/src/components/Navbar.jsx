@@ -2,36 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, Navigate } from "react-router-dom";
 import axios from "axios";
 import { styles } from "../styles";
-import { navLinks } from "../constants";
+import { navLinks, adminNavLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 import LoginButton from "./Buttons/LoginButton";
-const LogoTitle = () => {
-  return (
-    <Link
-      to="/"
-      className="flex items-center gap-2"
-      onClick={() => {
-        setActive("");
-        window.scrollTo(0, 0);
-      }}
-    >
-      <img
-        src={"/logo.png"}
-        alt="logo"
-        className="object-contain w-9 h-9"
-        onDragStart={(e) => {
-          e.preventDefault();
-        }}
-      />
-      <p className="text-white text-[18px] font-bold cursor-pointer flex md:flex-row flex-col">
-        Cuong &nbsp;
-        <span className="hidden sm:block"> | CinnamonAI</span>
-      </p>
-    </Link>
-  );
-};
+import { LogoTitle, NavItem } from "./NavBarComponents";
 
-const Navbar = () => {
+const Navbar = ({ isAdmin }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const currentPath = useLocation().pathname;
@@ -44,24 +20,22 @@ const Navbar = () => {
         currentPath !== "/" ? "bg-primary" : "bg-transparent"
       }`}
     >
-      <div className="flex items-center justify-between w-full mx-auto select-none max-w-7xl">
-        <LogoTitle />
+      <div className="flex items-center justify-between w-full mx-auto select-none ">
+        <LogoTitle setActive={setActive} />
         <LoginButton />
         {/* Navigation stuffs */}
         <ul className="flex-row hidden gap-10 list-none sm:flex">
           {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => {
-                setActive(nav.title);
-              }}
-            >
-              <Link to={`${nav.pathname}`}>{nav.title}</Link>
-            </li>
+            <div key={nav.id}>
+              <NavItem nav={nav} active={active} setActive={setActive} />
+            </div>
           ))}
+          {isAdmin &&
+            adminNavLinks.map((nav) => (
+              <div key={nav.id}>
+                <NavItem nav={nav} active={active} setActive={setActive} />
+              </div>
+            ))}
         </ul>
         <div className="flex items-center justify-end flex-1 sm:hidden">
           <img
