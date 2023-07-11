@@ -33,7 +33,7 @@ const MemberCard = ({ index, name, image, role, description }) => {
         >
           <motion.div
             variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-            className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card select-none"
+            className="w-full bg-yellow-300 p-[1px] rounded-[20px] shadow-card select-none"
           >
             <button
               onClick={handleFlip}
@@ -42,7 +42,7 @@ const MemberCard = ({ index, name, image, role, description }) => {
                 scale: 1,
                 speed: 450,
               }}
-              className="bg-tertiary w-full rounded-[20px] py-4 px-4 min-h-[280px] flex justify-evenly items-center flex-col"
+              className="bg-primary w-full rounded-[20px] py-4 px-4 min-h-[280px] flex justify-evenly items-center flex-col"
             >
               <AnimatePresence initial={false}>
                 {isFlipping ? (
@@ -97,13 +97,13 @@ const About = () => {
       >
         Click the card for more information about me.
       </motion.p>
-
+  */}
       <div className="flex flex-wrap justify-evenly gap-16 mt-20 items-center ">
         {members.map((member, index) => (
           <MemberCard key={member.name} index={index} {...member} />
         ))}
-      </div> */}
-      <img src="/about-img.png" className="h-96"></img>
+        <img src="/about-img.png" className="h-96"></img>
+      </div>
     </div>
   );
 };

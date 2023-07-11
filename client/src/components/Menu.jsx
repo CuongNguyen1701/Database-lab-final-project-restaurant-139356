@@ -2,6 +2,7 @@ import React from "react";
 import menuData from "../constants/menuData.json";
 import { InputField } from "./InputFields/InputField";
 import GenericButton from "./Buttons/GenericButton";
+import { motion, AnimatePresence } from "framer-motion";
 const FilterButton = ({ text, selected, setSelected }) => {
   const filterStyle =
     selected === text
@@ -13,9 +14,15 @@ const FilterButton = ({ text, selected, setSelected }) => {
     </button>
   );
 };
-const MenuItem = ({ item }) => {
+const MenuItem = ({ itemKey, item, addToCart }) => {
   return (
-    <div className="flex flex-col gap-5 bg-primary-light text-white  rounded-2xl h-full w-96 ">
+    <motion.div
+      key={itemKey}
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      // exit={{ opacity: 0, x: 100 }}
+      className="flex flex-col gap-5 bg-primary-light text-white  rounded-2xl h-full w-96 "
+    >
       <div className="rounded-bl-3xl rounded-t-xl bg-slate-200 flex flex-col items-center py-10">
         <img
           src={item.imageURL}
@@ -30,18 +37,21 @@ const MenuItem = ({ item }) => {
 
         <div className="justify-between flex flex-row pt-5">
           <div className="text-xl">{item.price}</div>
-          <button className="rounded-full bg-yellow-500 hover:bg-yellow-300 p-3">
+          <button
+            className="rounded-full bg-yellow-500 hover:bg-yellow-300 p-3"
+            onClick={(e) => addToCart(item)}
+          >
             🛒
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 //Get distinct categories from menuData
 let categoryList = [...new Set(menuData.map((item) => item.category))];
-const Menu = () => {
+const Menu = ({ addToCart }) => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
   const [search, setSearch] = React.useState("");
 
@@ -76,11 +86,18 @@ const Menu = () => {
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 items-center mx-auto">
-        {menuData.map((item, index) =>
-          item.category === selectedFilter || selectedFilter === "All" ? (
-            <MenuItem key={index} item={item} />
-          ) : null
-        )}
+        <AnimatePresence>
+          {menuData.map((item, index) =>
+            item.category === selectedFilter || selectedFilter === "All" ? (
+              <MenuItem
+                key={index}
+                itemKey={index}
+                item={item}
+                addToCart={addToCart}
+              />
+            ) : null
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

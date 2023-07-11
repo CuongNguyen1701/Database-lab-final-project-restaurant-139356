@@ -14,10 +14,12 @@ import {
   Booking,
   NotFound,
   ChatBot,
+  ShoppingCart,
   Signup,
   AddDish,
   AdminHomepage,
 } from "./components";
+import { ShopButton } from "./components/Buttons";
 const ToggleAdminButton = ({ setValue }) => {
   return (
     <button
@@ -35,19 +37,27 @@ const ToggleAdminButton = ({ setValue }) => {
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
+  const addToCart = (item) => {
+    setCartItems((oldCartItems) => [...oldCartItems, item]);
+  };
   return (
     <BrowserRouter>
       <div className="relative z-0  overflow-scroll no-scrollbar h-screen">
         <Navbar isAdmin={isAdmin} />
         <ChatBot />
+        <ShopButton itemCount={cartItems.length} />
         <ToggleAdminButton setValue={setIsAdmin} />
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/menu" element={<Menu />} />
+          <Route path="/" element={<MainPage addToCart={addToCart} />} />
+          <Route path="/menu" element={<Menu addToCart={addToCart} />} />
           <Route path="/about" element={<About />} />
           <Route path="/book-table" element={<Booking />} />
           <Route path="/signup" element={<Signup />} />
-
+          <Route
+            path="/cart"
+            element={<ShoppingCart cartItems={cartItems} />}
+          />
           <Route path="*" element={<NotFound />} />
 
           {/* Admin Routes */}

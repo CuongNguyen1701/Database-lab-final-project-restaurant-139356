@@ -3,6 +3,7 @@ import { InputField } from "../InputFields/InputField";
 import { useState } from "react";
 import bcrypt from "bcryptjs"; //for password hashing
 import GenericButton from "../Buttons/GenericButton";
+import PasswordChecklist from "react-password-checklist";
 const Signup = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -10,22 +11,20 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
   const HashPassword = (password) => {};
-  const Validate = (
-    name,
-    username,
-    phone,
-    email,
-    password,
-    passwordConfirm
-  ) => {
-    if (password !== passwordConfirm) {
-      alert("Passwords do not match");
-      return false;
-    }
-  };
+
   const HandleSignup = (e) => {
     e.preventDefault();
+    if (!validPassword) {
+      alert("Password is not valid");
+      return;
+    }
+    if (name === "" || username === "" || phone === "" || email === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+    
   };
   return (
     <div className="select-none bg-[#232831] flex flex-col items-center p-32 gap-32">
@@ -66,6 +65,26 @@ const Signup = () => {
           value={passwordConfirm}
           setValue={setPasswordConfirm}
           placeholder={"Confirm Password"}
+        />
+        <PasswordChecklist
+          rules={["minLength", "number", "capital", "specialChar", "match"]}
+          minLength={8}
+          specialChar={true}
+          number={true}
+          capital={true}
+          value={password}
+          valueAgain={passwordConfirm}
+          messages={{
+            minLength: `Password must be ${8} chars minimum.`,
+            capital: "Password must contain at least 1 capital letter.",
+            number: "Password must contain at least 1 number.",
+            specialChar: "Password must contain at least 1 special character.",
+            match: "Passwords must match.",
+          }}
+          onChange={(isValid) => {
+            setValidPassword(isValid);
+            console.log(isValid);
+          }}
         />
         <GenericButton text="Sign Up" onClick={HandleSignup} />
       </form>

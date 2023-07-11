@@ -4,6 +4,7 @@ import FacebookButton from "../Buttons/FacebookButton";
 import GenericButton from "../Buttons/GenericButton";
 import { Link } from "react-router-dom";
 import { InputField } from "../InputFields/InputField";
+import { motion, AnimatePresence } from "framer-motion";
 import bcrypt from "bcryptjs"; //for password hashing
 const Signin = ({ setOverlay }) => {
   const [username, setUsername] = useState("");
@@ -16,12 +17,14 @@ const Signin = ({ setOverlay }) => {
         setOverlay(false);
       }}
     >
-      <div
+      <motion.div
         className="p-5 flex flex-col items-center gap-5 bg-white rounded-2xl z-100 text-primary"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
         }}
+        initial={{ opacity: 0, y: 500 }}
+        animate={{ opacity: 1, y: 0 }}
       >
         <div className="text-primary text-3xl">Sign in</div>
         <InputField placeholder="username" type="text" />
@@ -38,7 +41,7 @@ const Signin = ({ setOverlay }) => {
           </Link>{" "}
           now!
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import About from "./About";
 import Booking from "./Booking";
 import Menu from "./Menu";
 import NotFound from "./NotFound";
-import ChatBot from "./Features/ChatBot";
+import { ChatBot, ShoppingCart } from "./Features";
 import Signup from "./Account/Signup";
 import AddDish from "./Admin/AddDish";
 import AdminHomepage from "./Admin/AdminHomepage";
@@ -16,6 +16,7 @@ export {
   Menu,
   NotFound,
   ChatBot,
+  ShoppingCart,
   Signup,
   AddDish,
   AdminHomepage,
