@@ -87,7 +87,7 @@ model Item{
   price Int
   description String
   category String[]
-  photo String
+  imageURL String
 
   orderItems OrderItem[]
   fancy Fancy[]

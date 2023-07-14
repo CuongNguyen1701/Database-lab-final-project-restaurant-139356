@@ -26,6 +26,7 @@ export const CreateUser: any = async (data: any) => {
         name: data.name,
         email: data.email,
         photo: data.photo,
+        phone: data.phone,
         salt: salt,
         hash: hash,
       },

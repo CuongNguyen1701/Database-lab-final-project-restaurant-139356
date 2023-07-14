@@ -5,11 +5,12 @@ export const GetSearchItems: any = async (
   request: Request,
   response: Response
 ) => {
-  const lowercasedSearchString: string = request.body.toLowerCase();
+  // console.log(request.body);
+  const lowercasedSearchString: string = request.body.data.toLowerCase();
   //extract the search string from the request body to array of strings
-  const searchStrings: string[] = request.body.split(" ");
-  const lowercasedSearchStrings: string[] = searchStrings.map(
-    (string: string) => string.toLowerCase()
+  // const searchStrings: string[] = request.body.data.split(" ");
+  const lowercasedSearchStrings: string[] = request.body.map((string: string) =>
+    string.toLowerCase()
   );
 
   const item: any = await Prisma.item

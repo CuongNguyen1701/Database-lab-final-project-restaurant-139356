@@ -30,7 +30,8 @@ import {
 } from "../controllers/booking";
 import { CreateStaff, DeleteStaff } from "../controllers/staff";
 import { isAuthenticated, isAuthorized } from "../middlewares/checkAuth";
-import { FromPixels } from "@tensorflow/tfjs-node-gpu";
+import { GetSearchItems } from "../services/search";
+
 dotenv.config();
 const router = Router();
 const successLoginUrl: string = `${process.env.FRONTEND_URL}/login/success`;
@@ -58,16 +59,20 @@ router.get(
 router.post(
   "/auth/signin",
   passport.authenticate("local", {
-    successRedirect: successLoginUrl,
+    // successRedirect: successLoginUrl,
     failureRedirect: failureLoginUrl,
-  })
+  }),
+  async (req: Request, res: Response) => {
+    const user = await GetUser(req.body.username);
+    return res.status(200).json(user);
+  }
 );
 router.post("/auth/signup", async (req: Request, res: Response) => {
-  const existed = await GetUser(req.body.id);
-  if (existed) return res.send(false);
-  const created = await CreateUser(req.body);
-  if (created) res.send(true);
-  else res.send(false);
+  const existed: any = await GetUser(req.body.id);
+  if (existed) return res.status(400).send(null);
+  const created: any = await CreateUser(req.body);
+  if (created) return res.status(200).send(created);
+  return res.status(400).send(null);
 });
 
 router.get(
@@ -86,6 +91,7 @@ router.get(
   }
 );
 router.get("/search/user/all", GetAllUsers);
+router.post("/search/item", GetSearchItems);
 router.get("/api/get_user/:id", async (req: Request, res: Response) => {
   try {
     const data = await GetUser;

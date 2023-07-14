@@ -20,24 +20,26 @@ const Signin = ({ setOverlay }) => {
       username: username,
       password: password,
     };
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(loginData));
-    const response = await axios.post(`${backendUrl}/login`, formData);
+    const response = await axios.post(`${backendUrl}/auth/signin`, loginData, {
+      withCredentials: true,
+    });
     console.log(response);
-    if (response.data.success) {
-      alert("Login successful");
+    if (response.status === 200) {
       setOverlay(false);
+      alert("Login successful");
+      //TODO: store response.data
     } else {
       alert("Login failed");
     }
   };
-  const handleOAuthLogin = async (provider) => {
-    const response = await axios.get(`${backendUrl}/login/${provider}`);
-    console.log(response);
-    if (response.data.success) {
-      alert("Login successful");
-      setOverlay(false);
-    }
+  const handleOAuthLogin = (provider) => {
+    window.location.href = `${backendUrl}/auth/${provider}/callback`;
+    // const response = await axios.get(`${backendUrl}/auth/${provider}/callback`);
+    // console.log(response);
+    // if (response.data.success) {
+    //   alert("Login successful");
+    //   setOverlay(false);
+    // }
   };
   return (
     <div
@@ -57,12 +59,22 @@ const Signin = ({ setOverlay }) => {
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="text-primary text-3xl">Sign in</div>
-        <InputField placeholder="username" type="text" />
-        <InputField placeholder="password" type="password" />
+        <InputField
+          placeholder="username"
+          type="text"
+          value={username}
+          setValue={setUsername}
+        />
+        <InputField
+          placeholder="password"
+          type="password"
+          value={password}
+          setValue={setPassword}
+        />
         <GenericButton text="Log in" onClick={handleLogin} />
         --- OR ---
-        <GoogleButton />
-        <FacebookButton />
+        <GoogleButton onClick={() => handleOAuthLogin("google")} />
+        <FacebookButton onClick={() => handleOAuthLogin("facebook")} />
         <div className="text-primary">
           Don't have an account?{" "}
           <Link

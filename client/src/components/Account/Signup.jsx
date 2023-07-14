@@ -26,15 +26,16 @@ const Signup = () => {
     }
     //TODO: Handle signup
     const signupData = {
+      id: username,
       name: name,
       username: username,
       phone: phone,
       email: email,
       password: password,
     };
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(signupData));
-    const response = await axios.post(`${backendUrl}/signup`, formData);
+    // const formData = new FormData();
+    // formData.append("data", JSON.stringify(signupData));
+    const response = await axios.post(`${backendUrl}/auth/signup`, signupData);
     console.log(response);
   };
   return (

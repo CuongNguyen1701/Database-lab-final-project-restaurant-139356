@@ -2,7 +2,7 @@ import { Prisma } from "../database/prismaClient";
 import { Request, Response } from "express";
 
 export const CreateItem: any = async (request: Request, response: Response) => {
-  const { name, price, description, category, photo }: any = request.body;
+  const { name, price, description, category, imageURL }: any = request.body;
 
   const item: object = await Prisma.item
     .create({
@@ -11,7 +11,7 @@ export const CreateItem: any = async (request: Request, response: Response) => {
         price: price,
         description: description,
         category: category,
-        photo: photo,
+        imageURL: imageURL,
       },
     })
     .then(() => {
@@ -89,7 +89,7 @@ export const GetItem: any = async (request: Request, response: Response) => {
 
 export const UpdateItem: any = async (request: Request, response: Response) => {
   const id: number = parseInt(request.params.item_id);
-  const { price, description, category, photo }: any = request.body;
+  const { price, description, category, imageURL }: any = request.body;
   const update: object = await Prisma.item
     .update({
       where: {
@@ -99,7 +99,7 @@ export const UpdateItem: any = async (request: Request, response: Response) => {
         price,
         description,
         category,
-        photo,
+        imageURL,
       },
     })
     .then((success) => {

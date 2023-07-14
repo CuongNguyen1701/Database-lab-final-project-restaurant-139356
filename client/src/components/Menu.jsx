@@ -52,18 +52,35 @@ const MenuItem = ({ itemKey, item, addToCart }) => {
 };
 
 //Get distinct categories from menuData
-let categoryList = [...new Set(menuData.map((item) => item.category))];
+// let categoryList = [...new Set(menuData.map((item) => item.category))];
 const Menu = ({ addToCart }) => {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [query, setQuery] = useState("");
-
+  const [data, setData] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+  // useEffect(() => {
+  //   // const fetchData = async () => {
+  //   //   const res = await axios.get(`${backendUrl}/menu`);
+  //   //   console.log(res.data);
+  //   //   setData(res.data);
+  //   // };
+  //   // fetchData();
+  //   setData(menuData);
+  // }, []);
+  useEffect(() => {
+    setCategoryList([...new Set(data.map((item) => item.category[0]))]);
+  }, [data]);
   const HandleSearch = async (e) => {
     e.preventDefault();
     if (query === "") return;
     //TODO: Handle query
-    const res = await axios.get(`${backendUrl}/api/menu/search?query=${query}`);
-    console.log(res.data);
+    const data = { data: query };
 
+    const res = await axios.post(`${backendUrl}/search/item`, data, {
+      withCredentials: true,
+    });
+    console.log(res.data);
+    setData(res.data);
   };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 pt-32">
@@ -87,10 +104,10 @@ const Menu = ({ addToCart }) => {
           />
         ))}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 items-center mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 items-center mx-auto h-fit">
         <AnimatePresence>
-          {menuData.map((item, index) =>
-            item.category === selectedFilter || selectedFilter === "All" ? (
+          {data.map((item, index) =>
+            item.category[0] === selectedFilter || selectedFilter === "All" ? (
               <MenuItem
                 key={index}
                 itemKey={index}
