@@ -19,7 +19,10 @@ const ImageUploadField = ({
         <input
           id="file-upload"
           type="file"
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            const file = URL.createObjectURL(e.target.files[0]);
+            setValue(file);
+          }}
           className={`self-center hidden`}
         />
       </label>

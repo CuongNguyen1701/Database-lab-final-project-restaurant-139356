@@ -1,8 +1,10 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import menuData from "../constants/menuData.json";
 import { InputField } from "./InputFields/InputField";
 import GenericButton from "./Buttons/GenericButton";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const FilterButton = ({ text, selected, setSelected }) => {
   const filterStyle =
     selected === text
@@ -52,22 +54,22 @@ const MenuItem = ({ itemKey, item, addToCart }) => {
 //Get distinct categories from menuData
 let categoryList = [...new Set(menuData.map((item) => item.category))];
 const Menu = ({ addToCart }) => {
-  const [selectedFilter, setSelectedFilter] = React.useState("All");
-  const [search, setSearch] = React.useState("");
+  const [selectedFilter, setSelectedFilter] = useState("All");
+  const [query, setQuery] = useState("");
 
-  const HandleSearch = (e) => {
+  const HandleSearch = async (e) => {
     e.preventDefault();
-    //TODO: Handle search
+    if (query === "") return;
+    //TODO: Handle query
+    const res = await axios.get(`${backendUrl}/api/menu/search?query=${query}`);
+    console.log(res.data);
+
   };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 pt-32">
       <div className="text-4xl">Our Menu</div>
       <div className="w-1/2 flex flex-col lg:flex-row  gap-3 items-center">
-        <InputField
-          value={search}
-          setValue={setSearch}
-          placeholder="Search..."
-        />
+        <InputField value={query} setValue={setQuery} placeholder="Search..." />
         <GenericButton text="Search" onClick={HandleSearch} />
       </div>
       <div className="flex flex-row flex-wrap gap-3">

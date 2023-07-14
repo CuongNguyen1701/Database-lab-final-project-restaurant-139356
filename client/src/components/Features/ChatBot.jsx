@@ -1,25 +1,29 @@
 import { useState, useRef } from "react";
-
+import axios from "axios";
+const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const ChatBot = () => {
   const bottomRef = useRef(null);
   const [displayChat, setDisplayChat] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [chatInput, setChatInput] = useState("");
-  const HandleSend = (e) => {
+  const HandleSend = async (e) => {
     e.preventDefault();
     if (chatInput === "") return;
     const message = {
       type: "user",
       message: chatInput,
     };
-    const response = {
-      type: "bot",
-      message: "Hello",
-    };
-    setChatHistory([...chatHistory, message, response]);
+    setChatHistory([...chatHistory, message]);
     //show latest messages
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     setChatInput("");
+    //TODO: Handle chatbot
+    const response = await axios.post(`${backendUrl}/chatbot`, {
+      message: chatInput,
+    });
+    setChatHistory([...chatHistory, response]);
+    //show latest messages
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
   const MessageBubble = ({ item }) => {
     return (

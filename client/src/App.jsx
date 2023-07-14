@@ -5,7 +5,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Navbar,
   MainPage,
@@ -20,6 +20,7 @@ import {
   AdminHomepage,
 } from "./components";
 import { ShopButton } from "./components/Buttons";
+import { loadCartData, storeCartData } from "./storage-managers/shoppingCart";
 const ToggleAdminButton = ({ setValue }) => {
   return (
     <button
@@ -36,27 +37,89 @@ const ToggleAdminButton = ({ setValue }) => {
 };
 
 const App = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const addToCart = (item) => {
-    setCartItems((oldCartItems) => [...oldCartItems, item]);
+    console.log(cartItems);
+    // Check if the item already exists in the cart
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    if (existingItem) {
+      // Item already exists in the cart, update the quantity
+      const updatedCartItems = cartItems.map((cartItem) =>
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      // Item doesn't exist in the cart, add it
+      const updatedCartItems = [...cartItems, { ...item, quantity: 1 }];
+      setCartItems(updatedCartItems);
+    }
+    console.log(`Item added to cart!`);
   };
+  const deleteFromCart = (item) => {
+    //delete item from cart
+    const updatedCartItems = cartItems.filter(
+      (cartItem) => cartItem.id !== item.id
+    );
+    setCartItems(updatedCartItems);
+    console.log(`Item deleted from cart!`);
+  };
+  const updateQuantity = (item, quantity) => {
+    //update quantity of item in cart
+    const updatedCartItems = cartItems.map((cartItem) =>
+      cartItem.id === item.id ? { ...cartItem, quantity: quantity } : cartItem
+    );
+    setCartItems(updatedCartItems);
+    console.log(`Item quantity updated!`);
+  };
+  //Get cart items from local storage
+  useEffect(() => {
+    const loadedCartData = loadCartData();
+    setCartItems(loadedCartData ? loadedCartData : []);
+  }, []);
+
+  //Store cart items to local storage
+  useEffect(() => {
+    if (cartItems?.length === 0) return;
+    // Store the updated cart data
+    storeCartData(cartItems);
+  }, [cartItems]);
   return (
     <BrowserRouter>
       <div className="relative z-0  overflow-scroll no-scrollbar h-screen">
         <Navbar isAdmin={isAdmin} />
         <ChatBot />
-        <ShopButton itemCount={cartItems.length} />
+        <ShopButton
+          itemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+        />
         <ToggleAdminButton setValue={setIsAdmin} />
         <Routes>
-          <Route path="/" element={<MainPage addToCart={addToCart} />} />
+          <Route
+            path="/"
+            element={
+              <div>
+                <MainPage />
+                <Menu addToCart={addToCart} />
+                <About />
+                <Booking />
+              </div>
+            }
+          />
           <Route path="/menu" element={<Menu addToCart={addToCart} />} />
           <Route path="/about" element={<About />} />
           <Route path="/book-table" element={<Booking />} />
           <Route path="/signup" element={<Signup />} />
           <Route
             path="/cart"
-            element={<ShoppingCart cartItems={cartItems} />}
+            element={
+              <ShoppingCart
+                cartItems={cartItems}
+                deleteFromCart={deleteFromCart}
+                updateQuantity={updateQuantity}
+              />
+            }
           />
           <Route path="*" element={<NotFound />} />
 

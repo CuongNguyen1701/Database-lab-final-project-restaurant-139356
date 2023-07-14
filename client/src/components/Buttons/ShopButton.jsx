@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShoppingCartIcon from "../../assets/ShoppingCartIcon";
 import { Navigate, Link } from "react-router-dom";
+
 const ShopButton = ({ itemCount }) => {
   return (
     <Link to="/cart">
