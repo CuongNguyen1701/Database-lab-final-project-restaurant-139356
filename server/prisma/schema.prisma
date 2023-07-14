@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+enum Role {
+  USER
+  ADMIN
+}
+model Customer{
+  id String @id 
+  role Role @default(USER)
+  email String?
+  photo String?
+  name String
+  address String?
+  age Int?
+  gender String?
+  phone String?
+  salt String?
+  hash String?
+
+  orders Order[]
+  reviews Review[]
+  bookings Booking[]
+  fancy Fancy[]
+}
+model Order{
+  id Int @id @default(autoincrement())
+  discountPercent Float  
+  createdAt String
+  totalCost Int
+  
+  customerID String
+  customer Customer @relation(fields:[customerID],references: [id],onDelete: Cascade)
+  staffID Int
+  staff Staff @relation(fields:[staffID],references: [id],onDelete: Cascade)
+
+  orderItems OrderItem[]
+}
+model Staff{
+  id Int @id @default(autoincrement())
+  name String
+  role String
+  phone String
+  shiftStart String
+  shiftEnd String
+
+  orders Order[]
+}
+model Review{
+  id Int @id @default(autoincrement())
+  rating Int
+  comment String
+
+  customerID String
+  customer Customer @relation(fields:[customerID],references: [id],onDelete: Cascade)
+
+}
+model Booking{
+  id Int @id @default(autoincrement())
+  customerCount Int
+  timeBookings String
+  note  String
+  
+  customerID String
+  customer Customer @relation(fields:[customerID],references: [id],onDelete: Cascade)
+}
+
+model OrderItem{
+  id Int @id @default(autoincrement())
+
+  orderID Int
+  order Order @relation(fields:[orderID],references: [id],onDelete: Cascade)
+  itemID Int
+  item Item @relation(fields:[itemID],references: [id],onDelete: Cascade)
+}
+model Item{
+  id Int @id @default(autoincrement())
+  name String 
+  price Int
+  description String
+  category String[]
+  photo String
+
+  orderItems OrderItem[]
+  fancy Fancy[]
+}
+model Fancy{
+  customerID String
+  customer Customer @relation(fields:[customerID],references: [id],onDelete: Cascade)
+  itemID Int
+  item Item @relation(fields:[itemID],references: [id],onDelete: Cascade)
+  @@id([customerID,itemID])
+}
