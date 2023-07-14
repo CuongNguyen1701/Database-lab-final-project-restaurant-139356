@@ -1,14 +1,38 @@
 import { useState } from "react";
 import { InputField, SelectField } from "./InputFields/InputField";
 import GenericButton from "./Buttons/GenericButton";
+import axios from "axios";
+const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const Booking = () => {
   const [guestName, setGuestName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [personCount, setPersonCount] = useState(0);
-  const HandleBooking = () => {
+  const HandleBooking = async () => {
     //TODO: Handle booking
+    if (
+      guestName === "" ||
+      email === "" ||
+      phone === "" ||
+      date === "" ||
+      personCount === 0
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+    //TODO: Handle booking
+    const bookingData = {
+      guestName: guestName,
+      email: email,
+      phone: phone,
+      date: date,
+      personCount: personCount,
+    };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(bookingData));
+    const response = await axios.post(`${backendUrl}/bookings`, formData);
+    console.log(response);
   };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 w-screen h-fit pt-32">

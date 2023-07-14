@@ -4,9 +4,23 @@ const members = [
   {
     name: "Nguyen Truc Cuong",
     image: cuong,
-    role: "Developer",
+    role: "Front-end Developer",
     description:
       "Sophomore student at Hanoi University of Science and Technology, majoring in Computer Science. I'm proficient in English and currently learning Japanese as my third language. I'm also really interested in Machine Learning and Data Science.",
+  },
+  {
+    name: "Le Phuong Nam",
+    image: pnam,
+    role: "Front-end Developer",
+    description:
+      "Sophomore student at Hanoi University of Science and Technology, majoring in Computer Science",
+  },
+  {
+    name: "Tran Duc Hoang Nam",
+    image: hnam,
+    role: "Back-end Developer",
+    description:
+      "Sophomore student at Hanoi University of Science and Technology, majoring in Computer Science",
   },
 ];
 

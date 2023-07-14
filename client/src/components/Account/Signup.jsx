@@ -1,9 +1,10 @@
 import React from "react";
 import { InputField } from "../InputFields/InputField";
 import { useState } from "react";
-import bcrypt from "bcryptjs"; //for password hashing
 import GenericButton from "../Buttons/GenericButton";
 import PasswordChecklist from "react-password-checklist";
+import axios from "axios";
+const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const Signup = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -12,9 +13,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [validPassword, setValidPassword] = useState(false);
-  const HashPassword = (password) => {};
 
-  const HandleSignup = (e) => {
+  const HandleSignup = async (e) => {
     e.preventDefault();
     if (!validPassword) {
       alert("Password is not valid");
@@ -24,7 +24,18 @@ const Signup = () => {
       alert("Please fill in all fields");
       return;
     }
-    
+    //TODO: Handle signup
+    const signupData = {
+      name: name,
+      username: username,
+      phone: phone,
+      email: email,
+      password: password,
+    };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(signupData));
+    const response = await axios.post(`${backendUrl}/signup`, formData);
+    console.log(response);
   };
   return (
     <div className="select-none bg-[#232831] flex flex-col items-center p-32 gap-32">
