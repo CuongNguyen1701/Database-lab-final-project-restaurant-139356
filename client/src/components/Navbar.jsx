@@ -7,7 +7,7 @@ import { logo, menu, close } from "../assets";
 import LoginButton from "./Buttons/LoginButton";
 import { LogoTitle, NavItem } from "./NavBarComponents";
 
-const Navbar = ({ isAdmin, setUserData }) => {
+const Navbar = ({ isAdmin, userData, setUserData }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const currentPath = useLocation().pathname;
@@ -22,7 +22,7 @@ const Navbar = ({ isAdmin, setUserData }) => {
     >
       <div className="flex items-center justify-between w-full mx-auto select-none ">
         <LogoTitle setActive={setActive} />
-        <LoginButton setUserData={setUserData} />
+        <LoginButton userData={userData} setUserData={setUserData} />
         {/* Navigation stuffs */}
         <ul className="flex-row hidden gap-10 list-none sm:flex">
           {navLinks.map((nav) => (

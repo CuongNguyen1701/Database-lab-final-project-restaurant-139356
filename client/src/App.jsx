@@ -94,7 +94,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="relative z-0  overflow-scroll no-scrollbar h-screen">
-        <Navbar isAdmin={isAdmin} setUserData={setUserData} />
+        <Navbar
+          isAdmin={isAdmin}
+          setUserData={setUserData}
+          userData={userData}
+        />
         <ChatBot />
         <ShopButton
           itemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
