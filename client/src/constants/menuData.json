@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Cheeseburger",
+    "category": ["Burgers"],
+    "description": "Classic beef patty topped with melted cheese, lettuce, tomato, and special sauce on a sesame seed bun.",
+    "imageURL": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2615&q=80",
+    "price": 4.99
+  },
+  {
+    "id": 2,
+    "name": "Chicken Nuggets",
+    "category": ["Sides"],
+    "description": "Crispy and golden chicken nuggets served with your choice of dipping sauce.",
+    "imageURL": "https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80",
+    "price": 3.49
+  },
+  {
+    "id": 3,
+    "name": "BBQ Ribs",
+    "category": ["Ribs"],
+    "description": "Tender and succulent BBQ ribs glazed with tangy barbecue sauce, served with coleslaw and fries.",
+    "imageURL": "https://images.unsplash.com/photo-1593030668930-8130abedd2b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "price": 8.99
+  },
+  {
+    "id": 4,
+    "name": "Veggie Wrap",
+    "category": ["Sides"],
+    "description": "Grilled vegetables, lettuce, tomato, and creamy sauce wrapped in a soft tortilla.",
+    "imageURL": "https://plus.unsplash.com/premium_photo-1664648119219-b00a63aa4bdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    "price": 5.99
+  },
+  {
+    "id": 5,
+    "name": "Fish and Chips",
+    "category": ["Fries"],
+    "description": "Crispy battered fish fillets served with seasoned fries and tartar sauce.",
+    "imageURL": "https://images.unsplash.com/photo-1576777647209-e8733d7b851d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    "price": 6.99
+  },
+  {
+    "id": 6,
+    "name": "Chicken Caesar Salad",
+    "category": ["Salads"],
+    "description": "Fresh romaine lettuce topped with grilled chicken, Parmesan cheese, croutons, and Caesar dressing.",
+    "imageURL": "https://images.unsplash.com/photo-1505576633757-0ac1084af824?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
+    "price": 7.49
+  },
+  {
+    "id": 7,
+    "name": "Milkshake",
+    "category": ["Drinks"],
+    "description": "Creamy and indulgent milkshake available in chocolate, vanilla, or strawberry flavors.",
+    "imageURL": "https://images.unsplash.com/photo-1594488506255-a8bbfdeedbaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    "price": 3.99
+  },
+  {
+    "id": 8,
+    "name": "French Fries",
+    "category": ["Fries"],
+    "description": "Crispy golden fries sprinkled with salt for the perfect snack or side.",
+    "imageURL": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    "price": 2.49
+  },
+  {
+    "id": 9,
+    "name": "Margherita Pizza",
+    "category": ["Pizzas"],
+    "description": "Classic pizza topped with fresh tomato sauce, mozzarella cheese, and basil leaves.",
+    "imageURL": "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1836&q=80",
+    "price": 9.99
+  },
+  {
+    "id": 10,
+    "name": "Chicken Burrito",
+    "category": ["Chicken"],
+    "description": "Grilled chicken, rice, beans, cheese, and salsa wrapped in a warm tortilla.",
+    "imageURL": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+    "price": 6.49
+  },
+  {
+    "id": 11,
+    "name": "Club Sandwich",
+    "category": ["Sandwiches"],
+    "description": "Triple-decker sandwich with layers of roasted turkey, bacon, lettuce, tomato, and mayonnaise.",
+    "imageURL": "https://images.unsplash.com/photo-1567234669013-216f3a40e02e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "price": 7.99
+  },
+  {
+    "id": 12,
+    "name": "Veggie Burger",
+    "category": ["Burgers"],
+    "description": "Delicious plant-based patty topped with fresh vegetables and a special sauce on a whole grain bun.",
+    "imageURL": "https://images.unsplash.com/photo-1564849012987-56a988d14596?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1427&q=80",
+    "price": 5.49
+  },
+  {
+    "id": 13,
+    "name": "Spicy Chicken Wings",
+    "category": ["Chicken"],
+    "description": "Crispy and spicy chicken wings served with blue cheese dressing and celery sticks.",
+    "imageURL": "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    "price": 8.49
+  },
+  {
+    "id": 14,
+    "name": "Onion Rings",
+    "category": ["Sides"],
+    "description": "Golden fried onion rings with a crispy coating, perfect as a side or appetizer.",
+    "imageURL": "https://images.unsplash.com/photo-1625938146369-adc83368bda7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1325&q=80",
+    "price": 3.99
+  },
+  {
+    "id": 15,
+    "name": "Ice Cream Sundae",
+    "category": ["Desserts"],
+    "description": "A delightful dessert with scoops of ice cream, topped with whipped cream, chocolate sauce, and a cherry.",
+    "imageURL": "https://images.unsplash.com/photo-1572974201645-64d84597e4b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
+    "price": 4.99
+  }
+]

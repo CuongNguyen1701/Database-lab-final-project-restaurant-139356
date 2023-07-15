@@ -10,7 +10,6 @@ const Booking = () => {
   const [date, setDate] = useState("");
   const [personCount, setPersonCount] = useState(0);
   const HandleBooking = async () => {
-    //TODO: Handle booking
     if (
       guestName === "" ||
       email === "" ||
@@ -29,9 +28,10 @@ const Booking = () => {
       date: date,
       personCount: personCount,
     };
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(bookingData));
-    const response = await axios.post(`${backendUrl}/bookings`, formData);
+    const response = await axios.post(
+      `${backendUrl}/api/create_booking`,
+      bookingData
+    );
     console.log(response);
   };
   return (
