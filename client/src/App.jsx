@@ -22,6 +22,7 @@ import {
 } from "./components";
 import { ShopButton } from "./components/Buttons";
 import { loadCartData, storeCartData } from "./storage-managers/shoppingCart";
+import { loadUserData, storeUserData } from "./storage-managers/userData";
 const ToggleAdminButton = ({ setValue }) => {
   return (
     <button
@@ -80,6 +81,8 @@ const App = () => {
   useEffect(() => {
     const loadedCartData = loadCartData();
     setCartItems(loadedCartData ? loadedCartData : []);
+    const loadedUserData = loadUserData();
+    setUserData(loadedUserData ? loadedUserData : null);
   }, []);
 
   //Store cart items to local storage
