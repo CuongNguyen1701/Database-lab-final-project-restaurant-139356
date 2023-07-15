@@ -18,6 +18,7 @@ import {
   Signup,
   AddDish,
   AdminHomepage,
+  UserPage,
 } from "./components";
 import { ShopButton } from "./components/Buttons";
 import { loadCartData, storeCartData } from "./storage-managers/shoppingCart";
@@ -39,6 +40,7 @@ const ToggleAdminButton = ({ setValue }) => {
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [userData, setUserData] = useState(null);
   const addToCart = (item) => {
     console.log(cartItems);
     // Check if the item already exists in the cart
@@ -89,7 +91,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="relative z-0  overflow-scroll no-scrollbar h-screen">
-        <Navbar isAdmin={isAdmin} />
+        <Navbar isAdmin={isAdmin} setUserData={setUserData} />
         <ChatBot />
         <ShopButton
           itemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
@@ -121,6 +123,7 @@ const App = () => {
               />
             }
           />
+          <Route path="/user" element={<UserPage userData={userData} />} />
           <Route path="*" element={<NotFound />} />
 
           {/* Admin Routes */}

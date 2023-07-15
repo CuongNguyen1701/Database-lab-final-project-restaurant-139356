@@ -8,6 +8,7 @@ import { ChatBot, ShoppingCart } from "./Features";
 import Signup from "./Account/Signup";
 import AddDish from "./Admin/AddDish";
 import AdminHomepage from "./Admin/AdminHomepage";
+import UserPage from "./Account/UserPage";
 export {
   MainPage,
   Navbar,
@@ -20,4 +21,5 @@ export {
   Signup,
   AddDish,
   AdminHomepage,
+  UserPage,
 };

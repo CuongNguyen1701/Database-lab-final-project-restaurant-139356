@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Signin from "../Account/Signin";
-const LoginButton = () => {
+const LoginButton = ({ setUserData }) => {
   const [overlay, setOverlay] = useState(false);
   return (
     <div>
@@ -13,7 +13,7 @@ const LoginButton = () => {
       >
         Login
       </button>
-      {overlay && <Signin setOverlay={setOverlay} />}
+      {overlay && <Signin setOverlay={setOverlay} setUserData={setUserData} />}
     </div>
   );
 };

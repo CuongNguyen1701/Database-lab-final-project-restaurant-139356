@@ -8,8 +8,8 @@ const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env fil
 const FilterButton = ({ text, selected, setSelected }) => {
   const filterStyle =
     selected === text
-      ? "rounded-3xl py-2 px-6 bg-primary text-white"
-      : "bg-transparent  rounded-3xl py-2 px-6 hover:bg-primary hover:text-white";
+      ? "rounded-3xl py-2 px-6 bg-primary text-white w-fit"
+      : "bg-transparent  rounded-3xl py-2 px-6 hover:bg-primary hover:text-white w-fit";
   return (
     <button className={filterStyle} onClick={(e) => setSelected(text)}>
       {text}
@@ -58,29 +58,31 @@ const Menu = ({ addToCart }) => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  // useEffect(() => {
-  //   // const fetchData = async () => {
-  //   //   const res = await axios.get(`${backendUrl}/menu`);
-  //   //   console.log(res.data);
-  //   //   setData(res.data);
-  //   // };
-  //   // fetchData();
-  //   setData(menuData);
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = { data: " " };
+      const res = await axios.post(`${backendUrl}/search/item`, data, {
+        withCredentials: true,
+      });
+      setData(res.data);
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     setCategoryList([...new Set(data.map((item) => item.category[0]))]);
   }, [data]);
   const HandleSearch = async (e) => {
     e.preventDefault();
     if (query === "") return;
+    if (query === "all") setQuery(" ");
     //TODO: Handle query
     const data = { data: query };
 
     const res = await axios.post(`${backendUrl}/search/item`, data, {
       withCredentials: true,
     });
-    console.log(res.data);
     setData(res.data);
+    setSelectedFilter("All");
   };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 pt-32">

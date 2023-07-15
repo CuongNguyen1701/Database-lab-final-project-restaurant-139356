@@ -2,14 +2,15 @@ import { useState } from "react";
 import GoogleButton from "../Buttons/GoogleButton";
 import FacebookButton from "../Buttons/FacebookButton";
 import GenericButton from "../Buttons/GenericButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputField } from "../InputFields/InputField";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
-const Signin = ({ setOverlay }) => {
+const Signin = ({ setOverlay, setUserData }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleLogin = async () => {
     if (username === "" || password === "") {
       alert("Please fill in all fields");
@@ -28,6 +29,8 @@ const Signin = ({ setOverlay }) => {
       setOverlay(false);
       alert("Login successful");
       //TODO: store response.data
+      setUserData(response.data);
+      navigate("/user");
     } else {
       alert("Login failed");
     }
