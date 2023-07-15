@@ -104,7 +104,7 @@ const Menu = ({ addToCart }) => {
           />
         ))}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 items-center mx-auto h-fit">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 items-center mx-auto h-fit">
         <AnimatePresence>
           {data.map((item, index) =>
             item.category[0] === selectedFilter || selectedFilter === "All" ? (
