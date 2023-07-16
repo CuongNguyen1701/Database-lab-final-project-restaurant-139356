@@ -42,4 +42,7 @@ server.listen(port, () => {
 
 process.on("SIGINT", () => {
   console.log("🤖 Server closed");
+  server.close(() => {
+    process.exit(0);
+  });
 });
