@@ -30,6 +30,7 @@ const Signin = ({ setOverlay, setUserData }) => {
       alert("Login successful");
       //TODO: store response.data
       setUserData(response.data);
+      console.log(response.data);
       navigate("/user");
     } else {
       alert("Login failed");

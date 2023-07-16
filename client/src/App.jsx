@@ -103,7 +103,7 @@ const App = () => {
         <ShopButton
           itemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
         />
-        <ToggleAdminButton setValue={setIsAdmin} />
+        {/* <ToggleAdminButton setValue={setIsAdmin} /> */}
         <Routes>
           <Route
             path="/"

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Signin from "../Account/Signin";
+import { Link } from "react-router-dom";
 const LoginButton = ({ userData, setUserData }) => {
   const [overlay, setOverlay] = useState(false);
   return (
@@ -15,7 +16,14 @@ const LoginButton = ({ userData, setUserData }) => {
           Login
         </button>
       ) : (
-        userData.name
+        <button>
+          <Link
+            to="/user"
+            className="text-primary bg-yellow-500 rounded-full p-2 hover:bg-yellow-300 font-semibold"
+          >
+            {userData.name}
+          </Link>
+        </button>
       )}
       {overlay && <Signin setOverlay={setOverlay} setUserData={setUserData} />}
     </div>

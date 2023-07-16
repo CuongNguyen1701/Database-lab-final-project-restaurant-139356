@@ -14,7 +14,7 @@ const ShoppingCart = ({ cartItems, deleteFromCart, updateQuantity }) => {
           >
             <img src={item.imageURL} className="h-10 w-10 rounded-2xl " />
             <div className="w-1/5 font-semibold">{item.name}</div>
-            <div className="w-1/5 font-semibold">{item.price}</div>
+            <div className="w-1/5 font-semibold">${item.price}</div>
 
             <div className="w-1/5 font-semibold">Quantity: {item.quantity}</div>
             <div className="w-1/12 flex flex-row gap-3 font-bold text-xl">
@@ -35,7 +35,7 @@ const ShoppingCart = ({ cartItems, deleteFromCart, updateQuantity }) => {
               </button>
             </div>
             <div className="w-1/5 font-semibold">
-              Total: {roundPrice(item.quantity * item.price)}
+              Total Price: ${roundPrice(item.quantity * item.price)}
             </div>
             <button
               onClick={(e) => deleteFromCart(item)}
@@ -47,7 +47,7 @@ const ShoppingCart = ({ cartItems, deleteFromCart, updateQuantity }) => {
         );
       })}
       <div className="text-2xl font-semibold">
-        Grand Total:{" "}
+        Grand Total:{" $"}
         {roundPrice(
           cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)
         )}
