@@ -61,6 +61,7 @@ const Menu = ({ addToCart }) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = { data: " " };
+      console.log(backendUrl);
       const res = await axios.post(`${backendUrl}/search/item`, data, {
         withCredentials: true,
       });
