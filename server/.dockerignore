@@ -1,0 +1,9 @@
+node_modules
+dist
+.vscode
+.env
+cert.pem
+key.pem
+migrations
+migrations_lock.toml
+key.json

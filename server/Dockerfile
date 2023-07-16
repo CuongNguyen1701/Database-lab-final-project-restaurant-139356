@@ -16,11 +16,10 @@ RUN npm i express --save
 
 RUN npm install express-session --save
 
+RUN npm install @prisma/client
+
 RUN npx prisma generate
 
-RUN npx prisma migrate dev
-
-RUN npx prisma studio
 # If you are building your code for production
 # RUN npm ci --omit=dev
 
