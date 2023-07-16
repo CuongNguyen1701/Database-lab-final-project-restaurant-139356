@@ -16,6 +16,8 @@ RUN npm i express --save
 
 RUN npm install express-session --save
 
+RUN npm install ts-node --save
+
 RUN npm install @prisma/client
 
 RUN npx prisma generate
@@ -27,4 +29,4 @@ RUN npx prisma generate
 COPY . .
 
 EXPOSE 8080
-CMD [ "node", "server.ts" ]
+CMD [ "ts-node", "src/server.ts" ]
