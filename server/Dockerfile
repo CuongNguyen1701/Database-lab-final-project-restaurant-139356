@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm i yarn -g
+RUN npm i yarn 
 
 RUN yarn install
 
@@ -27,4 +27,4 @@ RUN npx prisma generate
 COPY . .
 
 EXPOSE 8080
-CMD [ "node", "server.js" ]
+CMD [ "node", "server.ts" ]
