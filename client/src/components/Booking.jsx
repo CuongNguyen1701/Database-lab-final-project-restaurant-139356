@@ -17,7 +17,7 @@ const Booking = () => {
       date === "" ||
       personCount === 0
     ) {
-      alert("Please fill in all fields");
+      alert("Please fill in all fields!");
       return;
     }
     //TODO: Handle booking
