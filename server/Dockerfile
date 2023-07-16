@@ -16,6 +16,8 @@ RUN npm i express --save
 
 RUN npm install express-session --save
 
+RUN npm install typescript -g 
+
 RUN npm install -g ts-node 
 
 RUN npm install @prisma/client
