@@ -6,7 +6,7 @@ export const GetSearchItems: any = async (
   response: Response
 ) => {
   // console.log(request);
-  console.log(request.body);
+  // console.log(request.body);
   const lowercasedSearchString: string = request.body.data.toLowerCase();
   //extract the search string from the request body to array of strings
   const searchStrings: string[] = request.body.data.split(" ");
