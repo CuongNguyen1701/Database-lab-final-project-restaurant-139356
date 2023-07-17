@@ -36,7 +36,7 @@ const Booking = () => {
   };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 w-screen h-fit pt-32">
-      <div className="text-4xl">Book A Table</div>
+      <div className="text-4xl font-body">Book A Table</div>
       <form className="flex flex-col items-center gap-5 text-white w-1/3">
         <InputField
           value={guestName}

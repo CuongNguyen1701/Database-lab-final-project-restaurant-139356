@@ -9,6 +9,8 @@ import Signup from "./Account/Signup";
 import AddDish from "./Admin/AddDish";
 import AdminHomepage from "./Admin/AdminHomepage";
 import UserPage from "./Account/UserPage";
+import LoginSuccess from "./Account/LoginSuccess";
+import Footer from "./Footer";
 export {
   MainPage,
   Navbar,
@@ -22,4 +24,6 @@ export {
   AddDish,
   AdminHomepage,
   UserPage,
+  LoginSuccess,
+  Footer,
 };

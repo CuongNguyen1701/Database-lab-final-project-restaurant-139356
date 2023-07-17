@@ -4,9 +4,11 @@ export function isAuthenticated(
   res: Response,
   next: NextFunction
 ) {
+  console.log(req.user);
   if (req.user) {
     next();
   } else {
+    console.log("You must login first!");
     res.status(401).send("You must login first!");
   }
 }

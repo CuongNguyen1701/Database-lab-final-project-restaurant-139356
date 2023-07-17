@@ -3,6 +3,8 @@ import menuData from "../constants/menuData.json";
 import { InputField } from "./InputFields/InputField";
 import GenericButton from "./Buttons/GenericButton";
 import { motion, AnimatePresence } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const FilterButton = ({ text, selected, setSelected }) => {
@@ -41,10 +43,24 @@ const MenuItem = ({ itemKey, item, addToCart }) => {
           <div className="text-xl">${item.price}</div>
           <button
             className="rounded-full bg-yellow-500 hover:bg-yellow-300 p-3"
-            onClick={(e) => addToCart(item)}
+            onClick={(e) => {
+              addToCart(item);
+            }}
           >
             🛒
           </button>
+          {/* <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          /> */}
         </div>
       </div>
     </motion.div>
@@ -87,7 +103,7 @@ const Menu = ({ addToCart }) => {
   };
   return (
     <div className="bg-white text-primary flex flex-col items-center gap-5 p-10 pt-32">
-      <div className="text-4xl">Our Menu</div>
+      <div className="text-4xl font-body">Our Menu</div>
       <div className="w-1/2 flex flex-col lg:flex-row  gap-3 items-center">
         <InputField value={query} setValue={setQuery} placeholder="Search..." />
         <GenericButton text="Search" onClick={HandleSearch} />

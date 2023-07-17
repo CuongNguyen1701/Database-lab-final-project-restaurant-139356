@@ -19,6 +19,8 @@ import {
   AddDish,
   AdminHomepage,
   UserPage,
+  LoginSuccess,
+  Footer,
 } from "./components";
 import { ShopButton } from "./components/Buttons";
 import { loadCartData, storeCartData } from "./storage-managers/shoppingCart";
@@ -103,7 +105,7 @@ const App = () => {
         <ShopButton
           itemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
         />
-        {/* <ToggleAdminButton setValue={setIsAdmin} /> */}
+        <ToggleAdminButton setValue={setIsAdmin} />
         <Routes>
           <Route
             path="/"
@@ -132,7 +134,10 @@ const App = () => {
           />
           <Route path="/user" element={<UserPage userData={userData} />} />
           <Route path="*" element={<NotFound />} />
-
+          <Route
+            path="/login/success"
+            element={<LoginSuccess setUserData={setUserData} />}
+          />
           {/* Admin Routes */}
           <Route
             path="/admin"
@@ -142,6 +147,7 @@ const App = () => {
             <Route path="add-dish" element={<AddDish />} />
           </Route>
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { storeUserData } from "../../storage-managers/userData";
 import { GenericButton } from "../Buttons";
 import { InputField } from "../InputFields/InputField";
+import axios from "axios";
+const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const InfoCard = ({ title, info }) => {
   return (
     <div className="flex flex-row items-center gap-3 text-xl text-yellow-100 rounded-full bg-primary-light w-2/3 ">
@@ -18,11 +20,28 @@ const InfoCard = ({ title, info }) => {
   );
 };
 const UserPage = ({ userData }) => {
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     if (userData === null) return;
     storeUserData(userData);
   }, [userData]);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    storeUserData(null);
+    window.location.reload();
+    navigate("/");
+  };
+  const handleLoadOrders = async (e) => {
+    e.preventDefault();
+    const customerID = userData.id;
+    const response = await axios.get(
+      `${backendUrl}/api/history/get_all_orders/${customerID}`
+    );
+    console.log(response.data);
+    setOrders(response.data);
+  };
   return userData ? (
     <div className="select-none bg-white flex flex-col items-center p-32 gap-32">
       <h1 className="flex flex-col gap-3 text-xl font-extrabold text-primary w-1/2">
@@ -32,15 +51,25 @@ const UserPage = ({ userData }) => {
         <InfoCard title="Address" info={userData.address} />
         <InfoCard title="Phone" info={userData.phone} />
 
-        <GenericButton
-          text="logout"
-          onClick={(e) => {
-            e.preventDefault();
-            storeUserData(null);
-            window.location.reload();
-            navigate("/");
-          }}
-        />
+        <GenericButton text="logout" onClick={handleLogout} />
+        <GenericButton text="load orders" onClick={handleLoadOrders} />
+        {orders.length !== 0
+          ? orders.map((order) => {
+              return (
+                <div className="flex flex-col gap-1">
+                  <div> orderID: {order[0].orderID}</div>
+                  {order.map((item) => {
+                    return (
+                      <div className="flex flex-row">
+                        itemID: {item.itemID}
+                        quantity: {item.quantity}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })
+          : null}
       </h1>
     </div>
   ) : (

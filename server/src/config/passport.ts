@@ -53,12 +53,13 @@ passport.use(
           }
         }
         console.log("user found & authenticated");
+        console.log(customer);
         return done(null, customer);
       }
       return done(null, false);
     } catch (err) {
       console.log(err);
-      return done(null, false);
+      return done(err, false);
     }
   })
 );
@@ -82,7 +83,13 @@ passport.use(
       const date = new Date().toLocaleString("sv-SE", {
         timeZone: "Asia/Ho_Chi_Minh",
       });
+
       if (profile.id) {
+        const existingUser: UserObj = await GetUser(profile.id);
+        console.log(existingUser);
+        if (existingUser) {
+          done(null, existingUser);
+        }
         const data = {
           id: profile.id,
           email: profile.emails![0].value,
@@ -92,9 +99,9 @@ passport.use(
 
         let newUser = await CreateUser(data);
         console.log(newUser);
-        return done(null, newUser);
+        done(null, newUser);
       }
-      return done(null, undefined);
+      done(null, undefined);
     }
   )
 );
@@ -106,5 +113,6 @@ passport.serializeUser((user: any, done) => {
 
 passport.deserializeUser(async (id: string, done) => {
   let user = await GetUser(id);
+  // console.log(user);
   return done(null, user);
 });

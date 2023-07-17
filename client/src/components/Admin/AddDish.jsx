@@ -27,16 +27,16 @@ const AddDish = () => {
       return;
     }
     const dishData = {
-      dishName: dishName,
-      dishDescription: dishDescription,
-      dishPrice: dishPrice,
-      dishCategory: dishCategory,
-      dishImage: dishImage,
+      name: dishName,
+      description: dishDescription,
+      price: dishPrice,
+      category: dishCategory,
+      imageURL: dishImage,
     };
-    //TODO: Handle add dish
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(dishData));
-    const response = await axios.post(`${backendUrl}/dishes`, formData);
+    const response = await axios.post(
+      `${backendUrl}/api/create_item`,
+      dishData
+    );
     console.log(response);
   };
   return (
@@ -54,9 +54,9 @@ const AddDish = () => {
           </button>
         </div>
       ) : (
-        <ImageUploadField
-          title="Dish Image Upload"
-          placeholder="Dish Image"
+        <InputField
+          type="text"
+          placeholder="Dish Image(URL)"
           value={dishImage}
           setValue={setDishImage}
         />

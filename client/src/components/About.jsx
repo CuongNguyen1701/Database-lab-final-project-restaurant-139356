@@ -88,7 +88,7 @@ const About = () => {
   return (
     <div className="select-none bg-[#232831] flex flex-col items-center p-32">
       <motion.div variants={textVariant()}>
-        <h2 className={styles.sectionHeadText}>About</h2>
+        <h2 className={`${styles.sectionHeadText} font-body`}>About</h2>
       </motion.div>
 
       {/* <motion.p

@@ -4,22 +4,16 @@ import { Request, Response } from "express";
 export const CreateItem: any = async (request: Request, response: Response) => {
   const { name, price, description, category, imageURL }: any = request.body;
 
-  const item: object = await Prisma.item
-    .create({
-      data: {
-        name: name,
-        price: price,
-        description: description,
-        category: category,
-        imageURL: imageURL,
-      },
-    })
-    .then(() => {
-      return response.status(200).json("👨🏾 Item created");
-    })
-    .catch((error) => {
-      return response.status(400).json(error);
-    });
+  const item: object = await Prisma.item.create({
+    data: {
+      name: name,
+      price: parseInt(price),
+      description: description,
+      category: [category],
+      imageURL: imageURL,
+    },
+  });
+  return response.status(201).json(item);
 };
 export const DeleteItem: any = async (request: Request, response: Response) => {
   const id: number = parseInt(request.params.item_id);

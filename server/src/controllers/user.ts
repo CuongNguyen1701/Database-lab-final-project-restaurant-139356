@@ -19,26 +19,21 @@ export const CreateUser: any = async (data: any) => {
     salt = bcrypt.genSaltSync(10);
     hash = bcrypt.hashSync(data.password, salt);
   }
-  const created: any = await Prisma.customer
-    .create({
-      data: {
-        id: data.id,
-        name: data.name,
-        email: data.email,
-        photo: data.photo,
-        phone: data.phone,
-        salt: salt,
-        hash: hash,
-      },
-    })
-    .then(() => {
-      console.log("👨🏾 User Registered");
-      return created;
-    })
-    .catch((error) => {
-      console.log(error);
-      return null;
-    });
+  const created: any = await Prisma.customer.create({
+    data: {
+      id: data.username || data.id,
+      name: data.name,
+      email: data.email,
+      photo: data.photo,
+      phone: data.phone,
+      salt: salt,
+      hash: hash,
+    },
+  });
+  if (created) {
+    console.log("created");
+  }
+  return created;
 };
 export const DeleteUser: any = async (request: Request, response: Response) => {
   const deleted: any = await Prisma.customer

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "../../index.css";
+
 const LogoTitle = ({ setActive }) => {
   return (
     <Link
@@ -18,9 +20,12 @@ const LogoTitle = ({ setActive }) => {
           e.preventDefault();
         }}
       />
-      <p className="text-white text-[18px] font-bold cursor-pointer flex md:flex-row flex-col">
+      <p className="text-white text-[21px] font-bold cursor-pointer flex md:flex-row flex-col font-body">
         DreamFlare &nbsp;
-        <span className="hidden sm:block"> | Gourmet</span>
+        <span className="hidden sm:block font-body text-[23px]">
+          {" "}
+          | Gourmet
+        </span>
       </p>
     </Link>
   );

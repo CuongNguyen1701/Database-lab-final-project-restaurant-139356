@@ -28,7 +28,6 @@ import {
   DeleteBooking,
   GetAllBookings,
 } from "../controllers/booking";
-import { CreateStaff, DeleteStaff } from "../controllers/staff";
 import { isAuthenticated, isAuthorized } from "../middlewares/checkAuth";
 import { GetSearchItems } from "../services/search";
 
@@ -36,6 +35,8 @@ dotenv.config();
 const router = Router();
 const successLoginUrl: string = `${process.env.FRONTEND_URL}/login/success`;
 const failureLoginUrl: string = `${process.env.FRONTEND_URL}/`;
+
+// router.get("/auth/logout", (req: Request, res: Response) => {
 
 router.get(
   "/auth/google",
@@ -60,18 +61,20 @@ router.post(
   "/auth/signin",
   passport.authenticate("local", {
     // successRedirect: successLoginUrl,
-    failureRedirect: failureLoginUrl,
+    // failureRedirect: failureLoginUrl,
   }),
   async (req: Request, res: Response) => {
-    const user = await GetUser(req.body.username);
-    return res.status(200).json(user);
+    console.log("Login successfully");
+    const user: any = await GetUser(req.body.username);
+    if (user) return res.status(200).json(user);
+    console.log("Cannot login");
+    return res.status(200).send(null);
   }
 );
 router.post("/auth/signup", async (req: Request, res: Response) => {
-  const existed: any = await GetUser(req.body.id);
-  if (existed) return res.status(400).send(null);
   const created: any = await CreateUser(req.body);
-  if (created) return res.status(200).send(created);
+  if (created) return res.status(201).send(created);
+  console.log("Cannot create user");
   return res.status(400).send(null);
 });
 
@@ -104,7 +107,9 @@ router.delete("/api/delete_user/:id", isAuthenticated, DeleteUser);
 
 router.get("/api/get_item/:item_id", GetItem);
 router.get("/api/get_list_items/:page_id", GetAllItems);
-router.post("/api/create_item", isAuthenticated, isAuthorized, CreateItem);
+//shoud be authenticated
+
+router.post("/api/create_item", CreateItem);
 router.delete(
   "/api/delete_item/:item_id",
   isAuthenticated,
@@ -130,13 +135,10 @@ router.delete(
   SaveFancyItem
 );
 
-router.post("/api/create_order", isAuthenticated, CreateOrderItem);
+//shoud be authenticated
+router.post("/api/create_order", CreateOrderItem);
 router.delete("/api/delete_order/:order_id", isAuthenticated, DeleteOrderItem);
-router.get(
-  "/api/history/get_all_orders/:page_id",
-  isAuthenticated,
-  GetAllOrderItems
-);
+router.get("/api/history/get_all_orders/:customer_id", GetAllOrderItems);
 
 router.post("/api/create_booking", isAuthenticated, CreateBooking);
 router.delete(
@@ -150,12 +152,4 @@ router.get(
   GetAllBookings
 );
 
-router.post("/api/create_staff", isAuthenticated, isAuthorized, CreateStaff);
-router.delete(
-  "/api/delete_staff/:staff_id",
-  isAuthenticated,
-  isAuthorized,
-  DeleteStaff
-);
-router.get("/api/get_all_staffs/", isAuthenticated, isAuthorized, DeleteStaff);
 export { router };

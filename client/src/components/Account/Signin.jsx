@@ -11,7 +11,7 @@ const Signin = ({ setOverlay, setUserData }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
     if (username === "" || password === "") {
       alert("Please fill in all fields");
       return;
@@ -21,22 +21,28 @@ const Signin = ({ setOverlay, setUserData }) => {
       username: username,
       password: password,
     };
-    const response = await axios.post(`${backendUrl}/auth/signin`, loginData, {
-      withCredentials: true,
-    });
-    console.log(response);
-    if (response.status === 200) {
-      setOverlay(false);
-      alert("Login successful");
-      //TODO: store response.data
-      setUserData(response.data);
+    try {
+      const response = await axios.post(
+        `${backendUrl}/auth/signin`,
+        loginData,
+        {
+          withCredentials: true,
+        }
+      );
       console.log(response.data);
-      navigate("/user");
-    } else {
-      alert("Login failed");
+      if (response.data) {
+        setOverlay(false);
+        alert("Login successful");
+        setUserData(response.data);
+        console.log(response.data);
+        navigate("/user");
+      }
+    } catch (error) {
+      console.log(error.response.status); // 401
+      if (error.response.status === 401) alert("Wrong account or password!");
     }
   };
-  const handleOAuthLogin = (provider) => {
+  const handleOAuthLogin = async (provider) => {
     window.location.href = `${backendUrl}/auth/${provider}/callback`;
     // const response = await axios.get(`${backendUrl}/auth/${provider}/callback`);
     // console.log(response);
@@ -75,7 +81,7 @@ const Signin = ({ setOverlay, setUserData }) => {
           value={password}
           setValue={setPassword}
         />
-        <GenericButton text="Log in" onClick={handleLogin} />
+        <GenericButton text="Log in" onClick={() => handleLogin()} />
         --- OR ---
         <GoogleButton onClick={() => handleOAuthLogin("google")} />
         <FacebookButton onClick={() => handleOAuthLogin("facebook")} />
