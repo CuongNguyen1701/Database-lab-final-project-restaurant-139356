@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20
 # Create app directory
 WORKDIR /usr/src/app
 # Install app dependencies
@@ -31,5 +31,4 @@ RUN npx prisma generate
 COPY . .
 
 EXPOSE 8080
-ENTRYPOINT [ "npx", "prisma", "generate" ]
 CMD [ "ts-node", "src/server.ts" ]
