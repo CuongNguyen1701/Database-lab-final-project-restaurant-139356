@@ -8,7 +8,6 @@ COPY package*.json ./
 COPY prisma ./prisma/ 
 COPY yarn.lock ./
 COPY pnpm-lock.yaml ./
-COPY /etc/secrets/.env ./
 RUN npm i yarn 
 
 RUN yarn install
