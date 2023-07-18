@@ -19,6 +19,29 @@ const InfoCard = ({ title, info }) => {
     </div>
   );
 };
+const OrderCard = ({ order }) => {
+  const [showItems, setShowItems] = useState(false);
+  return (
+    <div className="flex flex-col gap-1">
+      <div> orderID: {order[0].orderID}</div>
+      <GenericButton
+        text="show/hide details"
+        onClick={() => {
+          setShowItems((oldState) => !oldState);
+        }}
+      />
+      {showItems &&
+        order.map((item) => {
+          return (
+            <div className="flex flex-row gap-5">
+              itemID: {item.itemID}
+              quantity: {item.quantity}
+            </div>
+          );
+        })}
+    </div>
+  );
+};
 const UserPage = ({ userData }) => {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
@@ -55,19 +78,7 @@ const UserPage = ({ userData }) => {
         <GenericButton text="load orders" onClick={handleLoadOrders} />
         {orders.length !== 0
           ? orders.map((order) => {
-              return (
-                <div className="flex flex-col gap-1">
-                  <div> orderID: {order[0].orderID}</div>
-                  {order.map((item) => {
-                    return (
-                      <div className="flex flex-row">
-                        itemID: {item.itemID}
-                        quantity: {item.quantity}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
+              return <OrderCard order={order} />;
             })
           : null}
       </h1>
