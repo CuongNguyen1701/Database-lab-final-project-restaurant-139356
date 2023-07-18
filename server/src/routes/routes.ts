@@ -153,6 +153,6 @@ router.get(
   GetAllBookings
 );
 
-router.get("/api/history/admin/get_all_orders", GetAllOrderItems);
+router.get("/api/history/admin/get_all_orders", GetAllOrderItemsAdmin);
 
 export { router };

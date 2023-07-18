@@ -40,7 +40,7 @@ const MenuItem = ({ itemKey, item, addToCart }) => {
         <div className="justify-between flex flex-row pt-5">
           <div className="text-xl">${item.price}</div>
           <button
-            className="rounded-full bg-yellow-500 hover:bg-yellow-300 p-3"
+            className="rounded-full bg-yellow-500 hover:bg-yellow-300 w-12 h-12"
             onClick={(e) => {
               addToCart(item);
             }}

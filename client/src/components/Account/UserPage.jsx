@@ -22,21 +22,34 @@ const InfoCard = ({ title, info }) => {
 const OrderCard = ({ order }) => {
   const [showItems, setShowItems] = useState(false);
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-5 item-center">
       <div> orderID: {order[0].orderID}</div>
-      <GenericButton
-        text="show/hide details"
+      <div>
+        Total cost:{" $"}
+        {order.reduce(
+          (acc, item) => acc + item.quantity * item.itemDetail.price,
+          0
+        )}
+      </div>
+      <button
+        className="bg-primary text-yellow-100 rounded-full w-1/2 p-3"
         onClick={() => {
           setShowItems((oldState) => !oldState);
         }}
-      />
+      >
+        {showItems ? "Hide" : "Show"}
+      </button>
       {showItems &&
         order.map((item) => {
           return (
-            <div className="flex flex-row gap-5">
-              itemID: {item.itemID}
-              name: {item.itemDetail.name}
-              quantity: {item.quantity}
+            <div className="font-normal flex flex-row item-center gap-5">
+              <div>itemID: {item.itemID}</div>
+              <img
+                src={item.itemDetail.imageURL}
+                className="h-10 w-10 rounded-full"
+              />
+              <div>name: {item.itemDetail.name}</div>
+              <div>quantity: {item.quantity}</div>
             </div>
           );
         })}
@@ -68,7 +81,7 @@ const UserPage = ({ userData }) => {
   };
   return userData ? (
     <div className="select-none bg-white flex flex-col items-center p-32 gap-32">
-      <h1 className="flex flex-col gap-3 text-xl font-extrabold text-primary w-1/2">
+      <h1 className="flex flex-col item-center gap-3 text-xl font-extrabold text-primary w-1/2">
         <InfoCard title="Name" info={userData.name} />
         <InfoCard title="Email" info={userData.email} />
         <InfoCard title="Role" info={userData.role} />

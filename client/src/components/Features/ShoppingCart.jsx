@@ -2,13 +2,18 @@ import { useEffect, useState } from "react";
 import { GenericButton } from "../Buttons";
 import axios from "axios";
 import { loadUserData } from "../../storage-managers/userData";
-
+import { storeCartData } from "../../storage-managers/shoppingCart";
 import QRCode from "react-qr-code";
 const roundPrice = (price) => {
   return Math.round(price * 100) / 100;
 };
 const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
-const ShoppingCart = ({ cartItems, deleteFromCart, updateQuantity }) => {
+const ShoppingCart = ({
+  cartItems,
+  deleteFromCart,
+  updateQuantity,
+  setCartItems,
+}) => {
   const [discountPercent, setDiscountPercent] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [customerID, setCustomerID] = useState(0);
@@ -36,8 +41,11 @@ const ShoppingCart = ({ cartItems, deleteFromCart, updateQuantity }) => {
         request
       );
 
-      console.log(response.data);
       setOrderID(response.data);
+      alert(
+        "Order created successfully, you can check for detail in your user's page"
+      );
+      storeCartData([]);
     } catch (error) {
       console.log(error.response.status);
     }

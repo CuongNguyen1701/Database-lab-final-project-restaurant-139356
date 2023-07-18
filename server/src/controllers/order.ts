@@ -74,7 +74,19 @@ export const GetAllOrderItems: any = async (
         orderID: ele.id,
       },
     });
-    return orderItem;
+    const promise2 = orderItem.map(async (item: any) => {
+      let itemDetail: any = await Prisma.item.findUnique({
+        where: {
+          id: item.itemID,
+        },
+      });
+      item.itemDetail = itemDetail;
+      // console.log(itemDetail);
+      return item;
+    });
+    return Promise.all(promise2).then((result) => {
+      return result;
+    });
   });
   Promise.all(promise).then((result) => {
     console.log(result);
