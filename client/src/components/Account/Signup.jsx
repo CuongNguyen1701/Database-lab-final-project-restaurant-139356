@@ -4,6 +4,8 @@ import { useState } from "react";
 import GenericButton from "../Buttons/GenericButton";
 import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { storeUserData } from "../../storage-managers/userData";
 const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const Signup = () => {
   const [name, setName] = useState("");
@@ -13,7 +15,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [validPassword, setValidPassword] = useState(false);
-
+  const navigate = useNavigate();
   const HandleSignup = async (e) => {
     e.preventDefault();
     if (!validPassword) {
@@ -36,7 +38,11 @@ const Signup = () => {
     // const formData = new FormData();
     // formData.append("data", JSON.stringify(signupData));
     const response = await axios.post(`${backendUrl}/auth/signup`, signupData);
-    console.log(response);
+    if (response.status === 201) {
+      console.log(response.data);
+      alert("Signup successful, please go to the login page to login");
+      navigate("/");
+    }
   };
   return (
     <div className="select-none bg-[#232831] flex flex-col items-center p-32 gap-32">
