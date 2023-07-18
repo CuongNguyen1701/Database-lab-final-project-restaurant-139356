@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import menuData from "../constants/menuData.json";
+// import menuData from "../constants/menuData.json";
 import { InputField } from "./InputFields/InputField";
 import GenericButton from "./Buttons/GenericButton";
 import { motion, AnimatePresence } from "framer-motion";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL || ""; //from .env files
 const FilterButton = ({ text, selected, setSelected }) => {
