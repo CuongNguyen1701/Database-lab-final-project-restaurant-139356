@@ -35,6 +35,7 @@ const OrderCard = ({ order }) => {
           return (
             <div className="flex flex-row gap-5">
               itemID: {item.itemID}
+              name: {item.itemDetail.name}
               quantity: {item.quantity}
             </div>
           );
