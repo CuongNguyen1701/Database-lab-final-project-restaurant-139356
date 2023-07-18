@@ -22,6 +22,7 @@ import {
   CreateOrderItem,
   DeleteOrderItem,
   GetAllOrderItems,
+  GetAllOrderItemsAdmin,
 } from "../controllers/order";
 import {
   CreateBooking,
@@ -151,5 +152,7 @@ router.get(
   isAuthenticated,
   GetAllBookings
 );
+
+router.get("/api/history/admin/get_all_orders", GetAllOrderItems);
 
 export { router };

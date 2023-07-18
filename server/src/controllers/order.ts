@@ -67,9 +67,26 @@ export const GetAllOrderItems: any = async (
     },
   });
   // console.log(order);
-  let listOrderItems: any = [];
 
   const promise = order.map(async (ele: any) => {
+    let orderItem: any = await Prisma.orderItem.findMany({
+      where: {
+        orderID: ele.id,
+      },
+    });
+    return orderItem;
+  });
+  Promise.all(promise).then((result) => {
+    console.log(result);
+    response.status(200).send(JSON.stringify(result));
+  });
+};
+export const GetAllOrderItemsAdmin: any = async (
+  request: Request,
+  response: Response
+) => {
+  const allOrders = await Prisma.order.findMany();
+  const promise = allOrders.map(async (ele: any) => {
     let orderItem: any = await Prisma.orderItem.findMany({
       where: {
         orderID: ele.id,
